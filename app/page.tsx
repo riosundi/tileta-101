@@ -1,23 +1,249 @@
-export default function Page() {
+import Link from "next/link"
+import Image from "next/image"
+import {
+  ShoppingBag,
+  Bike,
+  Store,
+  ShieldCheck,
+  Wallet,
+  Clock,
+  Star,
+  ArrowRight,
+  UtensilsCrossed,
+  ShoppingCart,
+  BookOpen,
+  Laptop,
+  Shirt,
+} from "lucide-react"
+import { Logo } from "@/components/logo"
+import { Button } from "@/components/ui/button"
+import { getCurrentUser, dashboardPath } from "@/lib/auth"
+
+const categories = [
+  { name: "Food", icon: UtensilsCrossed, desc: "Hot meals & snacks" },
+  { name: "Groceries", icon: ShoppingCart, desc: "Daily essentials" },
+  { name: "Study Materials", icon: BookOpen, desc: "Books & supplies" },
+  { name: "Electronics", icon: Laptop, desc: "Gadgets & gear" },
+  { name: "Fashion", icon: Shirt, desc: "Style on campus" },
+]
+
+const roles = [
+  {
+    icon: ShoppingBag,
+    title: "Students",
+    desc: "Browse, order and pay with your wallet. Track delivery to your room in real time.",
+    href: "/register?role=student",
+    cta: "Order now",
+  },
+  {
+    icon: Bike,
+    title: "Delivery Agents",
+    desc: "Accept nearby orders, deliver across campus, and earn on every drop-off.",
+    href: "/register?role=agent",
+    cta: "Start earning",
+  },
+  {
+    icon: Store,
+    title: "Businesses",
+    desc: "List products, manage orders and grow your campus store with analytics.",
+    href: "/register?role=business",
+    cta: "Sell with us",
+  },
+]
+
+export default async function LandingPage() {
+  const user = await getCurrentUser()
+
   return (
-    <main className="relative flex min-h-screen items-center justify-center bg-[color:light-dark(#fff,#000)] text-[color:light-dark(#000,#fff)]">
-      <svg
-        aria-hidden="true"
-        className="size-20"
-        fill="none"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-        stroke="currentColor"
-        strokeWidth="0.5"
-      >
-        <path
-          d="M14.2 14.2H17V6.9375C17 4.76288 15.2371 3 13.0625 3H5.8V5.8M14.2 14.2V7.79063L7.79062 14.2H14.2ZM14.2 14.2V17H6.9375C4.76288 17 3 15.2371 3 13.0625V5.8H5.8M5.8 5.8V12.2313L12.2313 5.8H5.8Z"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <p className="absolute left-1/2 top-[calc(50%+56px)] -translate-x-1/2 whitespace-nowrap text-sm font-medium text-muted-foreground">
-        Your v0 generation will show here.
-      </p>
-    </main>
+    <div className="min-h-screen">
+      <header className="glass sticky top-0 z-40 border-b">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+          <Logo />
+          <nav className="hidden items-center gap-6 text-sm font-medium text-muted-foreground md:flex">
+            <a href="#categories" className="transition-colors hover:text-foreground">
+              Categories
+            </a>
+            <a href="#how" className="transition-colors hover:text-foreground">
+              How it works
+            </a>
+            <a href="#roles" className="transition-colors hover:text-foreground">
+              For you
+            </a>
+          </nav>
+          <div className="flex items-center gap-2">
+            {user ? (
+              <Button asChild>
+                <Link href={dashboardPath(user.role)}>Dashboard</Link>
+              </Button>
+            ) : (
+              <>
+                <Button variant="ghost" asChild className="hidden sm:inline-flex">
+                  <Link href="/login">Log in</Link>
+                </Button>
+                <Button asChild>
+                  <Link href="/register">Get started</Link>
+                </Button>
+              </>
+            )}
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="hero-glow relative overflow-hidden">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:py-24">
+          <div className="animate-float-up">
+            <span className="inline-flex items-center gap-2 rounded-full border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
+              <Star className="h-3.5 w-3.5 fill-primary text-primary" />
+              The Smart Campus Marketplace
+            </span>
+            <h1 className="mt-5 text-balance text-4xl font-bold leading-tight tracking-tight md:text-6xl">
+              Everything on campus,{" "}
+              <span className="brand-gradient-text">delivered to your door.</span>
+            </h1>
+            <p className="mt-5 max-w-md text-pretty text-lg leading-relaxed text-muted-foreground">
+              Order food, groceries, study materials, electronics and fashion from
+              trusted campus businesses. Paid securely, delivered by fellow students.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button size="lg" asChild>
+                <Link href="/register?role=student">
+                  Start ordering <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <Link href="/register?role=business">Become a seller</Link>
+              </Button>
+            </div>
+            <div className="mt-8 flex items-center gap-6 text-sm text-muted-foreground">
+              <div>
+                <p className="text-2xl font-bold text-foreground">10k+</p>
+                <p>Students</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-foreground">200+</p>
+                <p>Campus stores</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-foreground">15min</p>
+                <p>Avg delivery</p>
+              </div>
+            </div>
+          </div>
+          <div className="relative animate-float-up">
+            <div className="absolute -inset-4 rounded-[2rem] brand-gradient opacity-20 blur-2xl" />
+            <div className="relative overflow-hidden rounded-3xl border shadow-2xl">
+              <Image
+                src="/hero-delivery.png"
+                alt="Campus delivery agent with order"
+                width={640}
+                height={640}
+                className="h-full w-full object-cover"
+                priority
+              />
+            </div>
+            <div className="glass absolute -bottom-5 -left-5 hidden items-center gap-3 rounded-2xl border p-4 shadow-xl sm:flex">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/15 text-primary">
+                <Clock className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold">Order delivered</p>
+                <p className="text-xs text-muted-foreground">in 12 minutes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Categories */}
+      <section id="categories" className="mx-auto max-w-6xl px-4 py-16">
+        <h2 className="text-balance text-2xl font-bold md:text-3xl">Shop by category</h2>
+        <p className="mt-2 text-muted-foreground">Everything a student needs, in one place.</p>
+        <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-5">
+          {categories.map((c) => (
+            <Link
+              key={c.name}
+              href="/register"
+              className="group rounded-2xl border bg-card p-5 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                <c.icon className="h-6 w-6" />
+              </div>
+              <p className="mt-4 font-semibold">{c.name}</p>
+              <p className="text-sm text-muted-foreground">{c.desc}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section id="how" className="border-y bg-card/50">
+        <div className="mx-auto max-w-6xl px-4 py-16">
+          <h2 className="text-balance text-2xl font-bold md:text-3xl">How TILETA works</h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {[
+              { icon: ShoppingBag, t: "Browse & order", d: "Pick from hundreds of products across campus stores and add to cart." },
+              { icon: Wallet, t: "Pay with wallet", d: "Top up your secure TILETA wallet and check out in one tap." },
+              { icon: Bike, t: "Get it delivered", d: "A student agent picks it up and delivers straight to your room." },
+            ].map((s, i) => (
+              <div key={s.t} className="rounded-2xl border bg-card p-6">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full brand-gradient text-sm font-bold text-primary-foreground">
+                    {i + 1}
+                  </span>
+                  <s.icon className="h-5 w-5 text-primary" />
+                </div>
+                <p className="mt-4 text-lg font-semibold">{s.t}</p>
+                <p className="mt-1 text-muted-foreground">{s.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Roles */}
+      <section id="roles" className="mx-auto max-w-6xl px-4 py-16">
+        <h2 className="text-balance text-2xl font-bold md:text-3xl">Built for everyone on campus</h2>
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {roles.map((r) => (
+            <div key={r.title} className="flex flex-col rounded-2xl border bg-card p-6">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <r.icon className="h-6 w-6" />
+              </div>
+              <p className="mt-4 text-xl font-semibold">{r.title}</p>
+              <p className="mt-2 flex-1 text-muted-foreground">{r.desc}</p>
+              <Button variant="outline" className="mt-5 justify-between" asChild>
+                <Link href={r.href}>
+                  {r.cta} <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Trust + CTA */}
+      <section className="mx-auto max-w-6xl px-4 pb-20">
+        <div className="brand-gradient relative overflow-hidden rounded-3xl px-6 py-12 text-center text-primary-foreground md:px-12">
+          <ShieldCheck className="mx-auto h-10 w-10 opacity-90" />
+          <h2 className="mt-4 text-balance text-2xl font-bold md:text-3xl">
+            Secure payments. Trusted delivery. Real businesses.
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-pretty opacity-90">
+            Join thousands of students already getting their essentials delivered with TILETA.
+          </p>
+          <Button size="lg" variant="secondary" className="mt-6" asChild>
+            <Link href="/register">Create your free account</Link>
+          </Button>
+        </div>
+      </section>
+
+      <footer className="border-t">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 text-sm text-muted-foreground md:flex-row">
+          <Logo />
+          <p>{`© ${new Date().getFullYear()} TILETA. The Smart Campus Marketplace.`}</p>
+        </div>
+      </footer>
+    </div>
   )
 }
