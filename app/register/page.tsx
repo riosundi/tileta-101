@@ -2,12 +2,12 @@ import Link from "next/link"
 import { RegisterForm } from "@/components/auth/register-form"
 import { Logo } from "@/components/logo"
 
-export default async function RegisterPage({
+export default function RegisterPage({
   searchParams,
 }: {
-  searchParams: Promise<{ role?: string }>
+  searchParams: { role?: string }
 }) {
-  const { role } = await searchParams
+  const { role } = searchParams
   return (
     <div className="hero-glow flex min-h-screen flex-col items-center justify-center px-4 py-12">
       <Link href="/" className="mb-8">

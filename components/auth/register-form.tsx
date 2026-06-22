@@ -25,8 +25,11 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
   )
   const [pending, startTransition] = useTransition()
 
-  function action(formData: FormData) {
+  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget)
     formData.set("role", role)
+
     startTransition(async () => {
       const res = await registerUser(formData)
       if (res?.error) toast.error(res.error)
@@ -34,7 +37,7 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
   }
 
   return (
-    <form action={action} className="mt-6 space-y-5">
+    <form onSubmit={onSubmit} className="mt-6 space-y-5">
       <div className="space-y-2">
         <Label>I am a</Label>
         <div className="grid grid-cols-2 gap-2">
