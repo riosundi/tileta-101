@@ -9,48 +9,53 @@ export function VideoIntro() {
 
   useEffect(() => {
     setIsMounted(true)
+    const hasSeenVideo = localStorage.getItem('tileta-video-seen')
+    if (hasSeenVideo) {
+      setIsOpen(false)
+    }
   }, [])
+
+  const handleClose = () => {
+    setIsOpen(false)
+    localStorage.setItem('tileta-video-seen', 'true')
+  }
 
   if (!isMounted) return null
 
   return (
     <>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
-          <div className="relative w-full max-w-2xl">
-            <button
-              onClick={() => setIsOpen(false)}
-              className="absolute -top-10 right-0 rounded-lg p-2 text-white hover:bg-white/10 transition-colors"
-              aria-label="Close video"
-            >
-              <X className="h-6 w-6" />
-            </button>
-            
-            <div className="relative overflow-hidden rounded-2xl bg-black aspect-video">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="h-full w-full object-cover"
-                onEnded={() => {
-                  // Optionally close after video ends, or let it loop
-                }}
-              >
-                <source
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hailuo-2_3_Cinematic_App_Intro_Tileta_Vibe_Premium_modern_minimalist._Visual_Palette_Solid_-0-veYXKjQ5Ii33QovYdRtvBAnK3MFnTN.mp4"
-                  type="video/mp4"
-                />
-              </video>
-            </div>
+        <div className="fixed inset-0 z-50 w-screen h-screen bg-black">
+          {/* Close button */}
+          <button
+            onClick={handleClose}
+            className="absolute top-6 right-6 z-60 text-white hover:text-gray-300 transition-colors"
+            aria-label="Close video"
+          >
+            <X className="h-8 w-8" />
+          </button>
 
-            <button
-              onClick={() => setIsOpen(false)}
-              className="mt-4 mx-auto block px-6 py-2 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
-            >
-              Skip intro
-            </button>
-          </div>
+          {/* Full-screen video */}
+          <video
+            autoPlay
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+            onEnded={handleClose}
+          >
+            <source
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hailuo-2_3_Cinematic_App_Intro_Tileta_Vibe_Premium_modern_minimalist._Visual_Palette_Solid_-0-veYXKjQ5Ii33QovYdRtvBAnK3MFnTN.mp4"
+              type="video/mp4"
+            />
+          </video>
+
+          {/* Skip button */}
+          <button
+            onClick={handleClose}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 z-60 px-8 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-200 transition-colors"
+          >
+            Skip intro
+          </button>
         </div>
       )}
     </>
