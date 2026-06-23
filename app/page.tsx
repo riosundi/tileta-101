@@ -18,6 +18,7 @@ import {
 import { Logo } from "@/components/logo"
 import { Button } from "@/components/ui/button"
 import { getCurrentUser, dashboardPath } from "@/lib/auth"
+import { VideoIntro } from "@/components/video-intro"
 
 const categories = [
   { name: "Food", icon: UtensilsCrossed, desc: "Hot meals & snacks" },
@@ -56,6 +57,7 @@ export default async function LandingPage() {
 
   return (
     <div className="min-h-screen">
+      <VideoIntro />
       <header className="glass sticky top-0 z-40 border-b">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <Logo />
