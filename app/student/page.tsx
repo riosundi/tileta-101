@@ -122,7 +122,7 @@ export default async function StudentPage() {
           </h1>
           <div className="flex items-center gap-2 text-xl text-emerald-400 font-semibold">
             <ShoppingCart className="w-6 h-6" />
-            <span>Wallet Balance: ZMW 2,000.00</span>
+            <span>Wallet Balance: K 2,000.00</span>
           </div>
         </div>
 
@@ -173,7 +173,7 @@ export default async function StudentPage() {
                               <div className="flex justify-between items-start mb-1">
                                 <span className="font-medium text-emerald-400">{product.name}</span>
                                 <span className="text-emerald-300 font-bold">
-                                  ZMW {product.price.toLocaleString()}
+                                  K {product.price.toFixed(2)}
                                 </span>
                               </div>
                               <p className="text-gray-400 text-xs mb-2">{product.description}</p>
