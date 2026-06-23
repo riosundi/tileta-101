@@ -48,14 +48,6 @@ export function VideoIntro() {
               type="video/mp4"
             />
           </video>
-
-          {/* Skip button */}
-          <button
-            onClick={handleClose}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 z-60 px-8 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-200 transition-colors"
-          >
-            Skip intro
-          </button>
         </div>
       )}
     </>
