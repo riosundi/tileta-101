@@ -131,24 +131,13 @@ export default async function LandingPage() {
           </div>
           <div className="relative animate-float-up">
             <div className="absolute -inset-4 rounded-[2rem] brand-gradient opacity-20 blur-2xl" />
-            <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl border bg-card shadow-2xl">
-              <div className="absolute inset-0 opacity-30 hero-glow" />
-              <div className="relative flex flex-col items-center gap-6 text-primary">
-                <svg
-                  aria-label="TILETA logo mark"
-                  role="img"
-                  viewBox="0 0 220 220"
-                  className="h-52 w-52 drop-shadow-2xl md:h-64 md:w-64"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M25 38h116v38h-43v109H57V76H25V38Z" fill="currentColor" />
-                  <path d="m112 38 80 40-80 107H70l69-107-27-14V38Z" fill="currentColor" />
-                  <path d="m99 78 42-24v45l-24 14-18-35Z" className="text-accent" fill="currentColor" />
-                </svg>
-                <span className="text-5xl font-bold tracking-[0.18em] text-foreground md:text-6xl">TILETA</span>
-                <span className="font-mono text-xs uppercase tracking-[0.35em] text-muted-foreground">Campus, connected</span>
-              </div>
+            <div className="relative aspect-square overflow-hidden rounded-3xl border bg-card shadow-2xl">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPT%20Image%20Jun%2024%2C%202026%2C%2007_36_40%20PM-MHcYrD9aIHWuVRyN7fABrcdrF4aYb3.png"
+                alt="TILETA blue angular logo with a green package mark"
+                className="h-full w-full object-cover"
+                loading="eager"
+              />
             </div>
             <div className="glass absolute -bottom-5 -left-5 hidden items-center gap-3 rounded-2xl border p-4 shadow-xl sm:flex">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/15 text-primary">
