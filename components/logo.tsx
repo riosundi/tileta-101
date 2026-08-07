@@ -9,9 +9,10 @@ function TiletaMark() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M7 9h25v8H23v24h-9V17H7V9Z" fill="currentColor" />
-      <path d="M28 9h13v9H35L23 41h-9L28 9Z" fill="currentColor" />
-      <path d="m25 18 9-5v9l-5 3-4-7Z" className="text-primary" fill="currentColor" />
+      <path d="M5 7h25v7H19v26h-8V14H5V7Z" fill="currentColor" />
+      <path d="m27 7 16 8v9l-7-3-12 19H15l13-22-7-3 6-8Z" fill="currentColor" />
+      <path d="m22 17 9-5v8l-5 3-4-6Z" className="text-accent" fill="currentColor" />
+      <path d="m25 23 5-3 4 2-5 3-4-2Z" className="text-accent/80" fill="currentColor" />
     </svg>
   )
 }
